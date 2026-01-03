@@ -1,29 +1,113 @@
-<strong>**DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. **</strong>
+# File Manager Application
 
-# WESTERN GOVERNORS UNIVERSITY 
-## D424 – SOFTWARE ENGINEERING CAPSTONE
-Welcome to Software Engineering Capstone! This is an opportunity for students to develop full stack software engineering documentation and applications. They will execute documentation, unit testing, revision of software applications, and deploy software applications with scripts and containers on a cloud platform.
+A full-stack file management system that allows users to upload, organize, search, and manage files through a clean web interface. This project was built as a capstone to demonstrate practical full-stack engineering, REST API design, and production-oriented architecture.
 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-BASIC INSTRUCTIONS
-For this assessment, you will deploy your developed full stack software product to a web service of your choice.
+## Overview
+
+The File Manager application provides core functionality similar to a lightweight cloud storage system. Users can upload files, organize them into folders, and retrieve or search file metadata. The backend handles persistence and file storage, while the frontend focuses on usability and responsiveness.
+
+This project emphasizes clean architecture, clear separation of concerns, and real-world engineering patterns.
+
+## Tech Stack
+
+### Frontend
+- React
+- TypeScript
+- Vite
+- HTML5
+- CSS3
+
+### Backend
+- Java
+- Spring Boot
+- RESTful APIs
+- JPA / Hibernate
+- SQLite
+
+### Tooling & Infrastructure
+- Docker
+- Maven
+- Git / GitHub
+
+## Core Features
+
+- File upload and storage
+- Folder-based organization
+- File metadata persistence (name, folder, timestamps)
+- Search files by name
+- REST API for file operations
+- Responsive web interface
+- Container-ready backend
+
+## Architecture
+Frontend (React + TypeScript)
+|
+| REST API
+|
+Backend (Spring Boot)
+|
+|
+SQLite Database
+|
+Local File Storage
+
+The frontend communicates with the backend via RESTful endpoints. File metadata is stored in a relational database while file contents are persisted on disk. The architecture is designed to be easily extended to cloud storage and authentication.
+
+## API Endpoints
+
+- `POST /files/upload` – Upload a file
+- `GET /files` – Retrieve all files
+- `GET /files?name=` – Search files by name
+- `POST /folders` – Create a folder
+- `GET /folders` – Retrieve all folders
+
+## Running the Application Locally
+
+### Prerequisites
+- Node.js (v18+)
+- Java 17+
+- Docker (optional)
+
+### Backend
+
+```
+cd backend
+./mvnw spring-boot:run
+
+Or using Docker:
+
+docker build -t filemanager-backend .
+docker run -p 8080:8080 filemanager-backend
+
+It will be available at localhost:8080
+```
+
+### Frontend
+cd frontend
+npm install
+npm run dev
+```
+frontend will run at localhost:5173
+```
+
+What This Project Demonstrates
+- Full-stack development with React and Spring Boot
+- REST API design and consumption
+- File upload handling and persistence
+- Relational database modeling
+- Containerization with Docker
+- Writing maintainable, production-oriented code
+- Future Improvements
+- User authentication and authorization
+- Role-based access control
+- Cloud storage integration
+- Pagination and sorting
+- Drag-and-drop file uploads
+- Enhanced error handling and logging
 
 
-## SUPPLEMENTAL RESOURCES  
-1.	How to clone a project to IntelliJ using Git?
+Author<br>
+Hans Francisco<br>
+Software Engineer / Web Developer
 
-> Ensure that you have Git installed on your system and that IntelliJ is installed using [Toolbox](https://www.jetbrains.com/toolbox-app/). Make sure that you are using version 2022.3.2. Once this has been confirmed, click the clone button and use the 'IntelliJ IDEA (HTTPS)' button. This will open IntelliJ with a prompt to clone the proejct. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.  
 
-2. How to create a branch and start Development?
-
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
-
-- IntelliJ method
-> In IntelliJ, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
-
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
