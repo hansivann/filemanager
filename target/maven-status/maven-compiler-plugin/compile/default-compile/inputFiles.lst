@@ -1,0 +1,17 @@
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/AuthController.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/FileController.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/FolderController.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/MoveFileRequest.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/RootController.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/entity/BaseEntity.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/entity/FileMetadata.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/entity/Folder.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/entity/User.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/filemanagerApplication.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/repository/FileMetadataRepository.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/repository/FolderRepository.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/repository/UserRepository.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/security/SecurityConfig.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/FileService.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/UserService.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/UserServiceImpl.java

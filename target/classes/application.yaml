@@ -1,0 +1,39 @@
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password:
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#  h2:
+#    console:
+#      enabled: true
+
+#spring:
+#  datasource:
+#    url: jdbc:sqlite:file:./filemanager.db
+#    driver-class-name: org.sqlite.JDBC
+#
+#  jpa:
+#    database-platform: org.hibernate.community.dialect.SQLiteDialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+spring:
+  datasource:
+    url: jdbc:sqlite:file:./data/filemanager.db
+    driver-class-name: org.sqlite.JDBC
+
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+file:
+  upload-dir: ./uploads
