@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signOut, type User } from "firebase/auth"
+import { getRedirectResult, onAuthStateChanged, signOut, type User } from "firebase/auth"
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 
@@ -17,12 +17,22 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
-    return unsubscribe;
-  }, []);
+  (async () => {
+    try {
+      const res = await getRedirectResult(auth);
+      console.log("redirect result:", res?.user?.email ?? null);
+    } catch (e: any) {
+      console.error("redirect error:", e?.code, e?.message);
+    }
+  })();
+
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    setUser(user);
+    setLoading(false);
+  });
+
+  return unsubscribe;
+}, []);
 
   const logout = async () => {
     await signOut(auth);
