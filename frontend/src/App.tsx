@@ -214,7 +214,7 @@ function App() {
 
   return (
     <>
-      {user ? (
+
         <div className="app">
           <div className="app-container">
             <h1>File Management System</h1>
@@ -381,12 +381,8 @@ function App() {
             </div>
           </div>
         </div>
-      ) : (
-        <>
-          <Login />
-          <Register />
-        </>
-      )}
+         )
+
     </>
   );
 }
