@@ -1,10 +1,13 @@
 package com.capstone.filemanager.repository;
 
-import com.capstone.filemanager.entity.User;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import com.capstone.filemanager.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
+    boolean exexistsByEmail(String email);
 }
