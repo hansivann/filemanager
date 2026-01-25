@@ -1,6 +1,9 @@
 
 import './App.css'
 import {useState, useEffect} from 'react'
+import { useAuth } from './context/AuthContext'
+import Login from './components/Login'
+import { Register } from './components/Register'
 
 interface FileMetadata {
     id: number
@@ -17,15 +20,14 @@ function App() {
     const [selectedFolder, setSelectedFolder] = useState<string | null>(null)
     const [files, setFiles] = useState<FileMetadata[]>([])
     const [newFolderName, setNewFolderName] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loadingA, setLoadingA] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const[searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<FileMetadata[]>([])
     const [searchMessage, setSearchMessage] = useState<string | null>('');
+    const {user, loading, logout} = useAuth;
 
-    //can change env variables
-    //see .env file
-    //currently configured to cloud
+
     const API_BASE = import.meta.env.VITE_BASE_URL;
 
     const searchFiles = async () =>
@@ -38,7 +40,7 @@ function App() {
             return
         }
         try{
-            setLoading(true)
+            setLoadingA(true)
             const response = await fetch(`${API_BASE}/search?query=${searchQuery}`)
             if(!response.ok) throw new Error ('Search failed here at response')
             const data:FileMetadata[] = await response.json()
@@ -52,14 +54,14 @@ function App() {
         } catch (e) {
             setError(e instanceof Error ? e.message : 'Search failed here')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
     // Fetch all files to extract unique folders
     const fetchFolders = async () => {
         try {
-            setLoading(true)
+            setLoadingA(true)
             //all files
             const response = await fetch(API_BASE)
             if (!response.ok) throw new Error('Failed to fetch files')
@@ -70,7 +72,7 @@ function App() {
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
@@ -80,7 +82,7 @@ function App() {
         setSearchQuery('');
         setSearchMessage(null);
         try {
-            setLoading(true)
+            setLoadingA(true)
             const response = await fetch(`${API_BASE}/folder/${folder}`)
             if (!response.ok) throw new Error('Failed to fetch files')
             const folderFiles: FileMetadata[] = await response.json()
@@ -89,7 +91,7 @@ function App() {
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
@@ -99,7 +101,7 @@ function App() {
         if (!confirm(`Are you sure you want to delete the folder "${folderName}" and all its contents?`)) return
 
         try {
-            setLoading(true)
+            setLoadingA(true)
             const response = await fetch(`${API_BASE}/folder/${folderName}`, {
                 method: 'DELETE'
             })
@@ -112,14 +114,14 @@ function App() {
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
     // Delete a file
     const deleteFile = async (fileId: number) => {
         try {
-            setLoading(true)
+            setLoadingA(true)
             const response = await fetch(`${API_BASE}/${fileId}`, {
                 method: 'DELETE'
             })
@@ -131,7 +133,7 @@ function App() {
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Unknown error')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
@@ -181,7 +183,7 @@ function App() {
             formData.append('folder', folderName)
 
         try{
-            setLoading(true)
+            setLoadingA(true)
             const response = await fetch(`${API_BASE}/upload`, {
                 method: 'POST',
                 body: formData
@@ -195,7 +197,7 @@ function App() {
         }catch (e) {
             setError(e instanceof Error ? e.message : 'Failed to upload file')
         } finally {
-            setLoading(false)
+            setLoadingA(false)
         }
     }
 
@@ -215,7 +217,13 @@ function App() {
         fetchFolders()
     }, [])
 
+    if(loading) return <div>Loading...</div>;
+
     return (
+        <>
+        {user ? (
+
+
         <div className="app">
             <div className="app-container">
             <h1>File Management System</h1>
@@ -241,7 +249,7 @@ function App() {
                         onKeyDown={(e) => e.key === 'Enter' && searchFiles()}
                     />
                     <button
-                        onClick={searchFiles} disabled={loading}
+                        onClick={searchFiles} disabled={loadingA}
                     >Search</button>
                     {searchMessage && (
                         <p className="search-message">{searchMessage}</p>
@@ -281,7 +289,7 @@ function App() {
 
                     <button
                         onClick={() => document.getElementById('upload-new-folder')?.click()}
-                        disabled={loading || !newFolderName.trim()}
+                        disabled={loadingA || !newFolderName.trim()}
                     >
                         Upload File
                     </button>
@@ -292,10 +300,10 @@ function App() {
 
                 <div className="folders-list">
                     <h2>Folders ({folders.length})</h2>
-                    {loading && <p>Loading...</p>}
+                    {loadingA && <p>Loading...</p>}
 
                     {/*if no folders yet, then show this*/}
-                    {!loading && folders.length === 0 && (
+                    {!loadingA && folders.length === 0 && (
                         <p className="empty-state">No folders yet. Create your first folder above!</p>
                     )}
 
@@ -318,14 +326,14 @@ function App() {
                                     />
                                     <button
                                         onClick={() => document.getElementById(`upload-${folder}`)?.click()}
-                                        disabled={loading}
+                                        disabled={loadingA}
                                     >
                                         Upload
                                     </button>
                                     <button
                                         className="delete-btn"
                                         onClick={() => deleteFolder(folder)}
-                                        disabled={loading}
+                                        disabled={loadingA}
                                     >
                                         🗑️
                                     </button>
@@ -355,7 +363,7 @@ function App() {
                                         <button
                                             className="delete-btn"
                                             onClick={() => deleteFile(file.id)}
-                                            disabled={loading}
+                                            disabled={loadingA}
                                         >
                                             🗑️
                                         </button>
@@ -371,9 +379,19 @@ function App() {
                     </div>
                 )}
                 </div>
+
             </div>
+
         </div>
+        ) : (
+            <>
+            <Login />
+            <Register />
+            </>
+        )
+    }
     )
-}
+    </>
+)}
 
 export default App
