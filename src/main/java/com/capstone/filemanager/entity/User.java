@@ -1,27 +1,49 @@
 package com.capstone.filemanager.entity;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name="users")
-public class User extends BaseEntity {
-    @Getter
-    @Column(unique = true, nullable = false)
-    private String username;
+public class User {
 
-    @Setter
-    @Column(nullable = false)
-    private String password;
+    @Id
+    @GeneratedValue(strategy= GenerationType.UUID)
+    private UUID id;
 
-    protected User(){}
+    @Column(nullable=false, unique=true)
+    private String email;
 
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
+    @Column(nullable=false)
+    private String passwordHash;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
 }
