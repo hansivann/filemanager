@@ -25,7 +25,7 @@ function App() {
     const[searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<FileMetadata[]>([])
     const [searchMessage, setSearchMessage] = useState<string | null>('');
-    const {user, loading, logout} = useAuth;
+    const {user, loading, logout} = useAuth();
 
 
     const API_BASE = import.meta.env.VITE_BASE_URL;
@@ -213,6 +213,8 @@ function App() {
     }
 
 
+
+
     useEffect(() => {
         fetchFolders()
     }, [])
@@ -239,6 +241,16 @@ function App() {
                 <p>
                     Files uploaded here will go to the same folder until you change the name.
                 </p>
+                <div>
+                    {user?.photoURL && (
+                        <img
+                            src={user.photoURL}
+                        />
+                    )}
+                    <p>User:<br />
+                    {user?.displayName}
+                    </p>
+                </div>
 
                 <div>
                     <input
@@ -390,7 +402,7 @@ function App() {
             </>
         )
     }
-    )
+
     </>
 )}
 

@@ -1,3 +1,4 @@
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/config/CorsConfig.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/AuthController.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/FileController.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/controller/FolderController.java
@@ -13,5 +14,6 @@
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/repository/UserRepository.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/security/SecurityConfig.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/FileService.java
+/Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/UserDetailsService.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/UserService.java
 /Users/mochi/Code/Projects/school/filemanager/src/main/java/com/capstone/filemanager/service/UserServiceImpl.java

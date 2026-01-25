@@ -1,5 +1,5 @@
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { useState } from "react"
+import { getRedirectResult, signInWithEmailAndPassword, signInWithRedirect } from "firebase/auth";
+import { useEffect, useState } from "react"
 import { auth, googleProvider } from "../firebase";
 
 
@@ -7,6 +7,17 @@ export default function Login() {
   const[email,setEmail] = useState('');
   const [ password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+   (async () => {
+    try {
+      await getRedirectResult(auth);
+    } catch (error: any) {
+      console.error(error)
+      setError(error.code ?? error.message);
+    }
+   }) ();
+  },[])
 
   const handleLogin = async(e:React.FormEvent) => {
     e.preventDefault();
@@ -20,9 +31,10 @@ export default function Login() {
 
   const handleLoginGoogle = async() => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
     } catch (error: any) {
-      setError(error.message)
+      setError(error.message ?? error.code)
+      console.error(error)
     }
   }
 
@@ -47,12 +59,10 @@ export default function Login() {
       {error && <p>{error}</p>}
 
     </form>
-    <div>
-      <button onClick={handleLoginGoogle} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth_providers/google.svg" alt="Google" width="20" />
-  Sign in with Google
-</button>
-    </div>
+    <button onClick={handleLoginGoogle}>
+
+    </button>
+
     </>
   );
 }

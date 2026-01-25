@@ -1,18 +1,19 @@
 package com.capstone.filemanager.controller;
 
-import com.capstone.filemanager.service.UserService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
 public class AuthController {
 
-    private final UserService userService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+    // public AuthController(UserService userService) {
+    // }
 
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password){
